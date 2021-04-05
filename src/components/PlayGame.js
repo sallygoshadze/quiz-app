@@ -7,13 +7,12 @@ const PlayGame = ({
   playGame,
   userCategory,
   difficulty,
+  gameStarted,
 }) => {
   return (
     <div>
       {/* Play button displayed only if the user has chosen a category and a difficulty level, game is over or the user has answered the last question */}
-      {userCategory &&
-      difficulty &&
-      (gameOver || userAnswers.length === total) ? (
+      {userCategory && difficulty && !gameStarted ? (
         <button onClick={playGame}>Play</button>
       ) : null}
     </div>

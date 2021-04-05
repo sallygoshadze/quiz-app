@@ -1,16 +1,10 @@
 import React from 'react';
 
-const Categories = ({
-  gameOver,
-  userAnswers,
-  total,
-  categories,
-  chooseCategory,
-}) => {
+const Categories = ({ categories, chooseCategory, gameStarted }) => {
   return (
     <div>
-      {/* Category types displayed only if the game is not started or the user answered the last question */}
-      {gameOver || userAnswers.length === total
+      {/* Category types displayed only if the game is not started*/}
+      {!gameStarted
         ? categories.map((category) => (
             <button
               key={category.id}

@@ -7,6 +7,7 @@ import Score from './components/Score';
 import Loading from './components/Loading';
 import Board from './components/Board';
 import NextQuestion from './components/NextQuestion';
+import Restart from './components/Restart';
 
 const TOTAL_QUESTIONS = 10;
 const DIFFICULTY = ['easy', 'medium', 'hard'];
@@ -22,6 +23,7 @@ const App = () => {
     categories: [],
     userCategory: '',
     difficulty: '',
+    gameStarted: false,
   });
 
   // Fetches category types
@@ -34,7 +36,7 @@ const App = () => {
 
   useEffect(() => {
     getCategories();
-  }, []);
+  }, [state.gameStarted]);
 
   // Gets the category user clicked on
   const chooseCategory = (e) => {
@@ -57,6 +59,7 @@ const App = () => {
     setState({
       ...state,
       gameOver: false,
+      gameStarted: true,
       questions: newQuestions,
       score: 0,
       userAnswers: [],
@@ -100,28 +103,40 @@ const App = () => {
     const next = state.number + 1;
 
     if (next === TOTAL_QUESTIONS) {
-      setState({ ...state, gameOver: true });
+      setState({ ...state, gameOver: true, gameStarted: false });
     } else {
       setState({ ...state, number: next });
     }
+  };
+
+  // Resets all the states to start again
+  const restartGame = () => {
+    setState({
+      loading: false,
+      questions: [],
+      number: 0,
+      userAnswers: [],
+      score: 0,
+      gameOver: true,
+      categories: [],
+      userCategory: '',
+      difficulty: '',
+      gameStarted: false,
+    });
   };
 
   return (
     <div>
       <h1>Quiz App</h1>
       <Categories
-        gameOver={state.gameOver}
-        userAnswers={state.userAnswers}
-        total={TOTAL_QUESTIONS}
         categories={state.categories}
         chooseCategory={chooseCategory}
+        gameStarted={state.gameStarted}
       />
       <Difficulty
-        gameOver={state.gameOver}
-        userAnswers={state.userAnswers}
-        total={TOTAL_QUESTIONS}
         DIFFICULTY={DIFFICULTY}
         chooseDifficulty={chooseDifficulty}
+        gameStarted={state.gameStarted}
       />
       <PlayGame
         gameOver={state.gameOver}
@@ -130,6 +145,7 @@ const App = () => {
         playGame={playGame}
         userCategory={state.userCategory}
         difficulty={state.difficulty}
+        gameStarted={state.gameStarted}
       />
       <Score score={state.score} gameOver={state.gameOver} />
       {state.loading && <Loading />}
@@ -153,6 +169,12 @@ const App = () => {
         number={state.number}
         total={TOTAL_QUESTIONS}
         nextQuestion={nextQuestion}
+      />
+      <Restart
+        gameOver={state.gameOver}
+        userAnswers={state.userAnswers}
+        total={TOTAL_QUESTIONS}
+        restartGame={restartGame}
       />
     </div>
   );
