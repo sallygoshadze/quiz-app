@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { fetchQuestions, fetchCategories } from './fetchData';
 import Categories from './components/Categories';
+import Difficulty from './components/Difficulty';
 import PlayGame from './components/PlayGame';
 import Score from './components/Score';
 import Loading from './components/Loading';
@@ -8,6 +9,7 @@ import Board from './components/Board';
 import NextQuestion from './components/NextQuestion';
 
 const TOTAL_QUESTIONS = 10;
+const DIFFICULTY = ['easy', 'medium', 'hard'];
 
 const App = () => {
   const [state, setState] = useState({
@@ -19,9 +21,8 @@ const App = () => {
     gameOver: true,
     categories: [],
     userCategory: '',
+    difficulty: '',
   });
-
-  const difficulty = ['easy', 'medium', 'hard'];
 
   // Fetches category types
   const getCategories = async () => {
@@ -40,12 +41,17 @@ const App = () => {
     setState({ ...state, userCategory: e.currentTarget.value });
   };
 
+  // Gets the difficulty level user clicked on
+  const chooseDifficulty = (e) => {
+    setState({ ...state, difficulty: e.currentTarget.value });
+  };
+
   // Starts the quiz after the user clicks on the play button
   const playGame = async () => {
     setState({ ...state, loading: true });
     const newQuestions = await fetchQuestions(
       TOTAL_QUESTIONS,
-      difficulty[0],
+      state.difficulty,
       state.userCategory
     );
     setState({
@@ -110,12 +116,20 @@ const App = () => {
         categories={state.categories}
         chooseCategory={chooseCategory}
       />
+      <Difficulty
+        gameOver={state.gameOver}
+        userAnswers={state.userAnswers}
+        total={TOTAL_QUESTIONS}
+        DIFFICULTY={DIFFICULTY}
+        chooseDifficulty={chooseDifficulty}
+      />
       <PlayGame
         gameOver={state.gameOver}
         userAnswers={state.userAnswers}
         total={TOTAL_QUESTIONS}
         playGame={playGame}
         userCategory={state.userCategory}
+        difficulty={state.difficulty}
       />
       <Score score={state.score} gameOver={state.gameOver} />
       {state.loading && <Loading />}
