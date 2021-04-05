@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { fetchQuestions } from './fetchData';
+import React, { useState, useEffect } from 'react';
+import { fetchQuestions, fetchCategories } from './fetchData';
+import Categories from './components/Categories';
 import PlayGame from './components/PlayGame';
 import Score from './components/Score';
 import Loading from './components/Loading';
@@ -16,14 +17,37 @@ const App = () => {
     userAnswers: [],
     score: 0,
     gameOver: true,
+    categories: [],
+    userCategory: '',
   });
 
   const difficulty = ['easy', 'medium', 'hard'];
 
+  // Fetches category types
+  const getCategories = async () => {
+    setState({ ...state, loading: true });
+    const data = await fetchCategories();
+    console.log(data);
+    setState({ ...state, loading: false, categories: data });
+  };
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+
+  // Gets the category user clicked on
+  const chooseCategory = (e) => {
+    setState({ ...state, userCategory: e.currentTarget.value });
+  };
+
   // Starts the quiz after the user clicks on the play button
   const playGame = async () => {
     setState({ ...state, loading: true });
-    const newQuestions = await fetchQuestions(TOTAL_QUESTIONS, difficulty[0]);
+    const newQuestions = await fetchQuestions(
+      TOTAL_QUESTIONS,
+      difficulty[0],
+      state.userCategory
+    );
     setState({
       ...state,
       gameOver: false,
@@ -79,11 +103,19 @@ const App = () => {
   return (
     <div>
       <h1>Quiz App</h1>
+      <Categories
+        gameOver={state.gameOver}
+        userAnswers={state.userAnswers}
+        total={TOTAL_QUESTIONS}
+        categories={state.categories}
+        chooseCategory={chooseCategory}
+      />
       <PlayGame
         gameOver={state.gameOver}
         userAnswers={state.userAnswers}
         total={TOTAL_QUESTIONS}
         playGame={playGame}
+        userCategory={state.userCategory}
       />
       <Score score={state.score} gameOver={state.gameOver} />
       {state.loading && <Loading />}
