@@ -3,10 +3,13 @@ import React from 'react';
 const CurrentQuestion = ({ currentNum, total, question }) => {
   return (
     <div>
-      <p>
+      <p className="number">
         Question: {currentNum} / {total}
       </p>
-      <p dangerouslySetInnerHTML={{ __html: question }}></p>
+      <p
+        className="question"
+        dangerouslySetInnerHTML={{ __html: question }}
+      ></p>
     </div>
   );
 };

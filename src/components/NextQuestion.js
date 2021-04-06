@@ -9,13 +9,15 @@ const NextQuestion = ({
   nextQuestion,
 }) => {
   return (
-    <div>
+    <div className="next">
       {/* Next button Displayed only if the user has clicked an answer and it's not the last question */}
       {!gameOver &&
       !loading &&
       userAnswers.length === number + 1 &&
       number !== total - 1 ? (
-        <button onClick={nextQuestion}>Next</button>
+        <button className="btn next-btn" onClick={nextQuestion}>
+          Next
+        </button>
       ) : null}
     </div>
   );

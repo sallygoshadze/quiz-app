@@ -11,7 +11,7 @@ const Questions = ({
   total,
 }) => {
   return (
-    <div>
+    <div className="board">
       <CurrentQuestion
         currentNum={currentNum}
         question={question}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fetchQuestions, fetchCategories } from './fetchData';
+import './App.css';
 import Categories from './components/Categories';
 import Difficulty from './components/Difficulty';
 import PlayGame from './components/PlayGame';
@@ -126,7 +127,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className="container">
       <h1>Quiz App</h1>
       <Categories
         categories={state.categories}

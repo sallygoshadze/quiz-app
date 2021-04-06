@@ -1,11 +1,16 @@
 import React from 'react';
 
-const Answers = ( {answers, userAnswer, checkAnswer}) => {
+const Answers = ({ answers, userAnswer, checkAnswer }) => {
   return (
-    <div>
+    <div className="answers">
       {answers.map((answer) => (
         <div key={answer}>
-          <button disabled={!!userAnswer} value={answer} onClick={checkAnswer}>
+          <button
+            className="btn answer-btn"
+            disabled={!!userAnswer}
+            value={answer}
+            onClick={checkAnswer}
+          >
             <span dangerouslySetInnerHTML={{ __html: answer }} />
           </button>
         </div>
