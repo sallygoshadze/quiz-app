@@ -6,7 +6,20 @@ const Answers = ({ answers, userAnswer, checkAnswer }) => {
       {answers.map((answer) => (
         <div key={answer}>
           <button
-            className="btn answer-btn"
+            className={`btn answer-btn ${
+              !!userAnswer &&
+              userAnswer.correct &&
+              userAnswer.correctAnswer === answer
+                ? 'correct'
+                : !!userAnswer &&
+                  !userAnswer.correct &&
+                  answer === userAnswer.answer &&
+                  answer !== userAnswer.correctAnswer
+                ? 'incorrect'
+                : !!userAnswer && answer === userAnswer.correctAnswer
+                ? 'correct'
+                : ''
+            }`}
             disabled={!!userAnswer}
             value={answer}
             onClick={checkAnswer}

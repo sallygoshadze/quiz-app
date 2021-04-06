@@ -54,13 +54,29 @@ h4 {
   font-size: 1.1rem;
 }
 
-.btn:hover {
+.category-btn:hover,
+.difficulty-btn:hover,
+.next-btn:hover,
+.play-btn:hover,
+.restart-btn:hover {
   cursor: pointer;
   background-color: var(--main);
 }
 
-.btn:focus {
+.category-btn:focus,
+.difficulty-btn:focus,
+.next-btn:focus,
+.play-btn:focus,
+.restart-btn:focus {
   background-color: var(--main);
+}
+
+.correct {
+  background-color: #8ef675;
+}
+
+.incorrect {
+  background-color: #eb9090;
 }
 
 .category-btn {
