@@ -18,7 +18,7 @@ body {
 }
 
 .container {
-  max-width: 800px;
+  max-width: 1000px;
   height: 85vh;
   background-color: var(--light);
   margin: 1.5rem auto;
@@ -29,7 +29,7 @@ body {
 }
 
 .container h1 {
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   letter-spacing: 0.3rem;
   margin-top: 0.5rem;
 }
@@ -41,12 +41,17 @@ body {
   min-width: 90%;
 }
 
+h4 {
+  font-size: 1.2rem;
+}
+
 .btn {
   background-color: var(--light);
   border: 0.1rem solid var(--dark);
   text-transform: capitalize;
   border-radius: 0.5rem;
   font-weight: 500;
+  font-size: 1.1rem;
 }
 
 .btn:hover {
@@ -71,13 +76,13 @@ body {
 .play-btn {
   padding: 0.4rem 0.7rem;
   margin: 0 0.5rem;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
 }
 
 .score {
   position: absolute;
   top: 20%;
-  left: 10%;
+  left: 20%;
   border: 0.1rem solid var(--light);
   border-radius: 0.5rem;
   padding: 0.2rem;
@@ -85,6 +90,8 @@ body {
 
 .score p {
   letter-spacing: 0.1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
 .board {
@@ -99,16 +106,19 @@ body {
 .number {
   position: absolute;
   top: 30%;
-  left: 10%;
+  left: 20%;
   letter-spacing: 0.1rem;
+  font-weight: 600;
 }
 
 .question {
   position: absolute;
   top: 40%;
-  left: 12%;
+  left: 22%;
   letter-spacing: 0.1rem;
-  max-width: 700px;
+  max-width: 800px;
+  font-weight: 600;
+  font-size: 1.2rem;
 }
 
 .answers {
@@ -121,6 +131,7 @@ body {
   margin: 0 0.2rem;
   padding: 0.3rem;
   justify-self: flex-start;
+  font-weight: 600;
 }
 
 .next {
@@ -136,7 +147,7 @@ body {
 .restart-btn {
   padding: 0.4rem 0.7rem;
   margin: 0 0.5rem;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
 }
 
 .loader {
@@ -196,18 +207,18 @@ body {
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 768px) {
   .container {
     height: 100vh;
     margin: 0;
   }
 
   .container h1 {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
   }
 
   h4 {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 
   .choice-section {
@@ -215,29 +226,21 @@ body {
     min-width: 55%;
   }
 
-  .btn {
-    font-size: 0.7rem;
+  .btn,
+  .score p,
+  .number,
+  .question {
+    font-size: 1rem;
   }
 
-  .score p {
-    font-size: 0.7rem;
-  }
   .answers {
     flex-direction: column;
-  }
-
-  .number {
-    font-size: 0.7rem;
-  }
-
-  .question {
-    font-size: 0.9rem;
   }
 
   .next,
   .restart-btn {
     position: absolute;
-    top: 90%;
-    right: 10%;
+    top: 85%;
+    right: 20%;
   }
 }
